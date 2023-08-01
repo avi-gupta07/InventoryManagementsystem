@@ -129,6 +129,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Product\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Product\Controllers\ProductDiscountController.cs" />
+    <Compile Include="Areas\Product\Controllers\ProductInventoryController.cs" />
     <Compile Include="Areas\Product\Controllers\ProductManagerController.cs" />
     <Compile Include="Areas\Product\ProductAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,6 +218,16 @@
     <Content Include="Areas\Product\Views\ProductCategory\Edit.cshtml" />
     <Content Include="Areas\Product\Views\ProductCategory\Delete.cshtml" />
     <Content Include="Areas\Product\Views\ProductCategory\Details.cshtml" />
+    <Content Include="Areas\Product\Views\ProductInventory\Index.cshtml" />
+    <Content Include="Areas\Product\Views\ProductInventory\Create.cshtml" />
+    <Content Include="Areas\Product\Views\ProductInventory\Edit.cshtml" />
+    <Content Include="Areas\Product\Views\ProductInventory\Delete.cshtml" />
+    <Content Include="Areas\Product\Views\ProductInventory\Details.cshtml" />
+    <Content Include="Areas\Product\Views\ProductDiscount\Index.cshtml" />
+    <Content Include="Areas\Product\Views\ProductDiscount\Details.cshtml" />
+    <Content Include="Areas\Product\Views\ProductDiscount\Edit.cshtml" />
+    <Content Include="Areas\Product\Views\ProductDiscount\Create.cshtml" />
+    <Content Include="Areas\Product\Views\ProductDiscount\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

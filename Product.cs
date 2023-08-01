@@ -22,7 +22,6 @@ namespace InventoryManagementsystem
         public int InventoryID { get; set; }
         public decimal Price { get; set; }
         public int DiscountID { get; set; }
-        public byte[] ModifiedAt { get; set; }
     
         public virtual Product_Category Product_Category { get; set; }
         public virtual ProductDiscount ProductDiscount { get; set; }

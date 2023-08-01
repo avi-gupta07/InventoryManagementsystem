@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace InventoryManagementsystem.Areas.Product.Controllers
 {
-    public class ProductCategoryController : Controller
+
+    public class ProductInventoryController : Controller
     {
         private InventoryManagementContext db = new InventoryManagementContext();
-        
+        // GET: Product/ProductInventory
         public ActionResult Index()
         {
-            return View(db.Product_Category.ToList());
+            return View(db.Product_Inventory.ToList());
         }
 
         public ActionResult Create()
@@ -21,10 +21,11 @@ namespace InventoryManagementsystem.Areas.Product.Controllers
             return View();
         }
 
+
         [HttpPost]
-        public ActionResult Create(Product_Category pc)
+        public ActionResult Create(Product_Inventory pi)
         {
-            db.Product_Category.Add(pc);
+            db.Product_Inventory.Add(pi);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -33,42 +34,41 @@ namespace InventoryManagementsystem.Areas.Product.Controllers
         {
             if (id != null)
             {
-                Product_Category pc = db.Product_Category.Find(id);
-                return View(pc);
+                Product_Inventory pi = db.Product_Inventory.Find(id);
+                return View(pi);
             }
             return HttpNotFound();
         }
 
         [HttpPost]
-        public ActionResult Edit(Product_Category pc)
+        public ActionResult Edit(Product_Inventory pi)
         {
-            var ExistingRecord = db.Product_Category.Find(pc.ProductCategoryID);
-
-            ExistingRecord.Name = pc.Name;
-            ExistingRecord.Description = pc.Description;
+            var ExistingRecord = db.Product_Inventory.Find(pi.ProductInventoryID);
+            ExistingRecord.Name = pi.Name;
+            ExistingRecord.Quantity = pi.Quantity;
             db.SaveChanges();
             return RedirectToAction("Index");
-            
-                
+
         }
 
         public ActionResult Delete(int? id)
         {
             if (id != null)
             {
-                Product_Category pc = db.Product_Category.Find(id);
-                return View(pc);
+                Product_Inventory pi = db.Product_Inventory.Find(id);
+                return View(pi);
             }
             return HttpNotFound();
         }
 
         [HttpPost]
-        public ActionResult DeleteConfirmed(Product_Category pc)
+        public ActionResult DeleteConfirmed(Product_Inventory pi)
         {
-            int? id = pc.ProductCategoryID;
-            if (id != null) {
-                Product_Category foundProduct = db.Product_Category.Find(id);
-                db.Product_Category.Remove(foundProduct);
+            int? id = pi.ProductInventoryID;
+            if (id != null)
+            {
+                Product_Inventory foundProduct = db.Product_Inventory.Find(id);
+                db.Product_Inventory.Remove(foundProduct);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -79,11 +79,10 @@ namespace InventoryManagementsystem.Areas.Product.Controllers
         {
             if (id != null)
             {
-                Product_Category pc = db.Product_Category.Find(id);
-                return View(pc);
+                Product_Inventory pi = db.Product_Inventory.Find(id);
+                return View(pi);
             }
             return HttpNotFound();
         }
-
     }
 }

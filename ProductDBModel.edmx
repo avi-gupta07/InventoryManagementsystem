@@ -17,7 +17,6 @@
           <Property Name="InventoryID" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="DiscountID" Type="int" Nullable="false" />
-          <Property Name="ModifiedAt" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -32,8 +31,8 @@
             <PropertyRef Name="ProductInventoryID" />
           </Key>
           <Property Name="ProductInventoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="ModifiedAt" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductDiscount">
           <Key>
@@ -43,9 +42,9 @@
           <Property Name="DiscountName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DiscountPercent" Type="int" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" Nullable="false" />
-          <Property Name="ModifiedAt" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <Association Name="FK_ProductCategory_Product">
           <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="1" />
@@ -117,7 +116,6 @@
           <Property Name="InventoryID" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="DiscountID" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedAt" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Product_Category" Relationship="Self.FK_ProductCategory_Product" FromRole="Product" ToRole="Product_Category" />
           <NavigationProperty Name="ProductDiscount" Relationship="Self.FK_ProductDiscount_Product" FromRole="Product" ToRole="ProductDiscount" />
           <NavigationProperty Name="Product_Inventory" Relationship="Self.FK_ProductInventory_Product" FromRole="Product" ToRole="Product_Inventory" />
@@ -137,8 +135,8 @@
           </Key>
           <Property Name="ProductInventoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedAt" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Products" Relationship="Self.FK_ProductInventory_Product" FromRole="Product_Inventory" ToRole="Product" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductDiscount">
           <Key>
@@ -150,8 +148,8 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ModifiedAt" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Products" Relationship="Self.FK_ProductDiscount_Product" FromRole="ProductDiscount" ToRole="Product" />
+          <Property Name="DiscountPercent" Type="Int32" />
         </EntityType>
         <Association Name="FK_ProductCategory_Product">
           <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="1" />
@@ -224,7 +222,6 @@
                 <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
-                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -240,22 +237,22 @@
           <EntitySetMapping Name="Product_Inventory">
             <EntityTypeMapping TypeName="InventoryManagementSystemModel.Product_Inventory">
               <MappingFragment StoreEntitySet="Product_Inventory">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProductInventoryID" ColumnName="ProductInventoryID" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductDiscounts">
             <EntityTypeMapping TypeName="InventoryManagementSystemModel.ProductDiscount">
               <MappingFragment StoreEntitySet="ProductDiscount">
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
                 <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
                 <ScalarProperty Name="DiscountName" ColumnName="DiscountName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

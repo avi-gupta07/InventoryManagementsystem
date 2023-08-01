@@ -1,0 +1,78 @@
+﻿@model IEnumerable<InventoryManagementsystem.ProductDiscount>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Discount", "Create")
+</p>
+
+<table class="container">
+    <tr class="row">
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.DiscountName)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.DiscountPercent)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayName("Available actions")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="row">
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.DiscountName)
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="col p-3 ">
+                @if (item.IsActive)
+                {
+                    <span>Yes</span>
+                }
+                else
+                {
+                    <span>No</span>
+                }
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.DiscountPercent)
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.StartDate, item.StartDate.ToShortDateString())
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.EndDate, item.EndDate.ToShortDateString())
+            </td>
+
+            <td class="col p-3 ">
+                @Html.ActionLink("Edit", "Edit", new { id = item.DiscountID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.DiscountID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.DiscountID })
+            </td>
+        </tr>
+    }
+
+
+</table>
+

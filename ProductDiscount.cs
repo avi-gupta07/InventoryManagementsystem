@@ -26,7 +26,7 @@ namespace InventoryManagementsystem
         public bool IsActive { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
-        public byte[] ModifiedAt { get; set; }
+        public Nullable<int> DiscountPercent { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
