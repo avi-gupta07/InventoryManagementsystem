@@ -1,0 +1,89 @@
+﻿@model InventoryManagementsystem.Product
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h2>Do you want to delete this Product category</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Inventory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Inventory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDiscount.DiscountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDiscount.DiscountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDiscount.DiscountPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDiscount.DiscountPercent)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("DeleteConfirmed", "ProductManager", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.ProductID)
+        <div class="form-actions">
+            <input type="submit" value="Delete" class="btn btn-defaut"> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+
+

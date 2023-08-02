@@ -1,8 +1,77 @@
-﻿
+﻿@model IEnumerable<InventoryManagementsystem.Product>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
-Of the ProductManger controller in Product Area
+
+<p>
+    @Html.ActionLink("Create New Product", "Create")
+</p>
+
+<table class="container">
+    <tr class="row">
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.SKU)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.Product_Category.Name)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.Product_Inventory.Name)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.Price) (in $)
+        </th>
+        <th class="col p-3 ">
+            @Html.DisplayNameFor(model => model.ProductDiscount.DiscountName)
+        </th>
+        <th class="col p-3">
+            @Html.DisplayName("Available actions")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="row">
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.SKU)
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.Product_Category.Name)
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.Product_Inventory.Name)
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td class="col p-3 ">
+                @Html.DisplayFor(modelItem => item.ProductDiscount.DiscountName)
+            </td>
+
+            <td class="col p-2 ">
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+            </td>
+        </tr>
+    }
+
+
+</table>
+
