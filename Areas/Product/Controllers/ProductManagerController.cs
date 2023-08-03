@@ -15,8 +15,11 @@ namespace InventoryManagementsystem.Areas.Product.Controllers
         // GET: Product/Product
         public ActionResult Index(int? page, string searchProduct, string searchByCategory, string sortOrder)
         {
-            ViewBag.priceOrder = String.IsNullOrEmpty(sortOrder)?"price_desc":"";   
-           
+            ViewBag.priceOrder = String.IsNullOrEmpty(sortOrder)?"price_desc":"";
+            ViewBag.searchProduct = String.IsNullOrEmpty(searchProduct) ? "" : searchProduct;
+            ViewBag.searchByCategory = String.IsNullOrEmpty(searchByCategory) ? "" : searchByCategory;
+
+
             IEnumerable<InventoryManagementsystem.Product> products = null;
 
 

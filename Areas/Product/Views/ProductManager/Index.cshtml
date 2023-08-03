@@ -28,7 +28,7 @@
     </table>
 }
 
-<br/><br />
+<br />
 <table class="container">
     <tr class="row">
         <th class="col p-3 ">
@@ -44,7 +44,9 @@
             @Html.DisplayName("Inventory")
         </th>
         <th class="col p-3 ">       
-            @Html.ActionLink("Price (in $)","Index",new { sortOrder=ViewBag.priceOrder })
+            @Html.ActionLink("Price (in $)","Index",
+            new { sortOrder=ViewBag.priceOrder , searchByCategory=ViewBag.searchByCategory,
+            searchProduct= ViewBag.searchProduct })
         </th>
         <th class="col p-3 ">
             @Html.DisplayName("Discount")
