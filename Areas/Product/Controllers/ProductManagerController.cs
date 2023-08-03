@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using PagedList;
 
 
 namespace InventoryManagementsystem.Areas.Product.Controllers
@@ -12,14 +13,53 @@ namespace InventoryManagementsystem.Areas.Product.Controllers
     {
         private InventoryManagementContext db = new InventoryManagementContext();
         // GET: Product/Product
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchProduct, string searchByCategory, string sortOrder)
         {
-           var products = db.Products
+            ViewBag.priceOrder = String.IsNullOrEmpty(sortOrder)?"price_desc":"";   
+           
+            IEnumerable<InventoryManagementsystem.Product> products = null;
+
+
+            if (!String.IsNullOrEmpty(searchProduct)) {              
+                products = db.Products
                             .Include(pc => pc.Product_Category)
                             .Include(pi => pi.Product_Inventory)
                             .Include(pd => pd.ProductDiscount)
+                            .Where(p => p.Name.Contains(searchProduct))
                             .ToList();
-            return View(products);
+            }
+            else if (!String.IsNullOrEmpty(searchByCategory))
+            {
+                products = db.Products
+                          .Include(pc => pc.Product_Category)
+                          .Include(pi => pi.Product_Inventory)
+                          .Include(pd => pd.ProductDiscount)
+                          .Where(p => p.Product_Category.Name.Contains(searchByCategory))
+                          .ToList();
+            }
+            else
+            {
+                products = db.Products
+                           .Include(pc => pc.Product_Category)
+                           .Include(pi => pi.Product_Inventory)
+                           .Include(pd => pd.ProductDiscount)                           
+                           .ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    products =products.OrderBy(p => p.Price);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(products.ToPagedList(pageNumber,pageSize));
         }
 
         public ActionResult Create()

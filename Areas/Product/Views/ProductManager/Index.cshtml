@@ -1,4 +1,7 @@
-﻿@model IEnumerable<InventoryManagementsystem.Product>
+﻿@model PagedList.IPagedList<InventoryManagementsystem.Product>
+@using PagedList.Mvc
+
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,28 +13,41 @@
     @Html.ActionLink("Create New Product", "Create")
 </p>
 
+@using (Html.BeginForm())
+{
+    <table>
+    <tr>
+        <th>@Html.DisplayName("Search by Product Name")</th>
+        <td>@Html.TextBox("searchProduct")</td>
+        <td> <input type="submit" value="Search" /></td>
+       
+        <th>@Html.DisplayName("Search by category")</th>
+        <td>@Html.TextBox("searchByCategory")</td>
+        <td> <input type="submit" value="Search" /></td>
+    </tr>
+    </table>
+}
+
+<br/><br />
 <table class="container">
     <tr class="row">
         <th class="col p-3 ">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayName("Product Name")
         </th>
         <th class="col p-3 ">
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayName("Description")
         </th>
         <th class="col p-3 ">
-            @Html.DisplayNameFor(model => model.SKU)
+            @Html.DisplayName("Category")
         </th>
         <th class="col p-3 ">
-            @Html.DisplayNameFor(model => model.Product_Category.Name)
+            @Html.DisplayName("Inventory")
+        </th>
+        <th class="col p-3 ">       
+            @Html.ActionLink("Price (in $)","Index",new { sortOrder=ViewBag.priceOrder })
         </th>
         <th class="col p-3 ">
-            @Html.DisplayNameFor(model => model.Product_Inventory.Name)
-        </th>
-        <th class="col p-3 ">
-            @Html.DisplayNameFor(model => model.Price) (in $)
-        </th>
-        <th class="col p-3 ">
-            @Html.DisplayNameFor(model => model.ProductDiscount.DiscountName)
+            @Html.DisplayName("Discount")
         </th>
         <th class="col p-3">
             @Html.DisplayName("Available actions")
@@ -46,10 +62,6 @@
             </td>
             <td class="col p-3 ">
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
-
-            <td class="col p-3 ">
-                @Html.DisplayFor(modelItem => item.SKU)
             </td>
             <td class="col p-3 ">
                 @Html.DisplayFor(modelItem => item.Product_Category.Name)
@@ -71,7 +83,11 @@
             </td>
         </tr>
     }
-
-
 </table>
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ?0:Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page,sortOrder = ViewBag.priceOrder }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+
 
